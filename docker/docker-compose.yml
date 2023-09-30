@@ -1,0 +1,93 @@
+version: '3.9'
+services:
+  mysql8:
+    image: mysql:8.0.20
+    container_name: mysql_8020
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123456
+      LANG: en_US.UTF-8
+    ports:
+      - "3306:3306"
+    command:
+      --max_connections=1000
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --default-authentication-plugin=mysql_native_password
+      --sql-mode="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO"
+    volumes:
+      - "./mysql/data:/var/lib/mysql"
+      - "./mysql/conf:/etc/mysql"
+      - "./mysql/mysql-files:/var/lib/mysql-files"
+      - "./mysql/init:/docker-entrypoint-initdb.d/"
+    networks:
+      - custom_net
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      retries: 10
+
+  nacos:
+    image: nacos/nacos-server:v2.2.2
+    container_name: nacos-server_222
+    restart: unless-stopped
+    volumes:
+      - "./nacos/logs:/home/nacos/logs"
+      - "./nacos/data/:/home/nacos/data"
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      # 修改MySQL的连接信息
+      - MYSQL_SERVICE_HOST=192.168.31.101
+      - MYSQL_SERVICE_DB_NAME=nacos_config
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=123456
+      # 调整Nacos的JVM参数
+      - JVM_XMS=256m
+      - JVM_XMX=256m
+      - JVM_XMN=128m
+      - JVM_MS=64m
+      - JVM_MMS=64m
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false&serverTimezone=UTC
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    networks:
+      - custom_net
+    healthcheck:
+      test: ["CMD-SHELL", "echo 'ruok' | curl -s telnet://localhost:8848 || exit 1"]
+      retries: 10
+    depends_on:
+      mysql8:
+        condition: service_healthy
+
+  seata:
+    image: seataio/seata-server:1.7.0
+    container_name: seata-server_170
+    restart: unless-stopped
+    volumes:
+      - "./seata/resources/application.yml:/seata-server/resources/application.yml"
+    environment:
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+      # 注册到Nacos上的IP
+      SEATA_IP: 192.168.31.101
+      # 注册到Nacos上的端口号
+      SEATA_PORT: 8091
+    ports:
+      - "7091:7091"
+      - "8091:8091"
+    depends_on:
+      nacos:
+        condition: service_healthy
+    networks:
+      - custom_net
+
+networks:
+  custom_net:
+    external:
+      name: play_with_seata_net

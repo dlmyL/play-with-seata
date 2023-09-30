@@ -1,7 +1,6 @@
-CREATE database if NOT EXISTS `seata_xa_order` default character set utf8mb4 collate utf8mb4_unicode_ci;
-use `seata_xa_order`;
+CREATE DATABASE if NOT EXISTS `seata_xa_order` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-SET NAMES utf8mb4;
+use `seata_xa_order`;
 
 CREATE TABLE IF NOT EXISTS `xa_order`(
     `id`             int(11) NOT NULL AUTO_INCREMENT,

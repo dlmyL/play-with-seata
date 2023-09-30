@@ -1,7 +1,6 @@
-CREATE database if NOT EXISTS `seata_xa_stock` default character set utf8mb4 collate utf8mb4_unicode_ci;
-use `seata_xa_stock`;
+CREATE DATABASE if NOT EXISTS `seata_xa_stock` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-SET NAMES utf8mb4;
+use `seata_xa_stock`;
 
 CREATE TABLE IF NOT EXISTS `xa_stock`(
     `id`             int(11) NOT NULL AUTO_INCREMENT,
