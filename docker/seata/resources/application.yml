@@ -25,19 +25,20 @@ seata:
   config:
     type: nacos
     nacos:
-      # Nacos 地址
+      # Nacos地址
       server-addr: 192.168.31.101:8848
       namespace:
       group: SEATA_GROUP
       username:
       password:
       context-path:
+      # 需要去Nacos控制台进行配置
       data-id: seataServer.properties
   registry:
     type: nacos
     nacos:
       application: seata-server
-      # Nacos 地址
+      # Nacos地址
       server-addr: 192.168.31.101:8848
       group: SEATA_GROUP
       namespace:
