@@ -30,6 +30,7 @@ public class AtOrderService extends ServiceImpl<AtOrderMapper, AtOrder> {
 
         // 订单总价 = 订购数量(count) * 商品单价(100)
         int orderMoney = count * 100;
+
         // 生成订单
         AtOrder order = AtOrder.builder()
                 .userId(userId)
@@ -38,6 +39,7 @@ public class AtOrderService extends ServiceImpl<AtOrderMapper, AtOrder> {
                 .money(orderMoney)
                 .build();
         super.save(order);
+
         // 调用账户余额扣减
         String result = accountFeignClient.reduce(userId, orderMoney);
         if (!Constants.SUCCESS.equals(result)) {

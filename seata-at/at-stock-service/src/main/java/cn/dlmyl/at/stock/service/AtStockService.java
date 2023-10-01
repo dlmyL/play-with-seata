@@ -30,6 +30,7 @@ public class AtStockService extends ServiceImpl<AtStockMapper, AtStock> {
         if (stock != null && stock.getCount() < count) {
             throw new RuntimeException("库存不够了！");
         }
+
         lambdaUpdate().setSql("count = count-" + count)
                 .eq(AtStock::getCommodityCode, commodityCode)
                 .update();

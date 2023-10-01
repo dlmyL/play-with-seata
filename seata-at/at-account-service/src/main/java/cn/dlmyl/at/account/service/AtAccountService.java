@@ -27,6 +27,7 @@ public class AtAccountService extends ServiceImpl<AtAccountMapper, AtAccount> {
         if (account != null && account.getMoney() < money) {
             throw new RuntimeException("账户余额不足！");
         }
+
         lambdaUpdate().setSql("money = money - " + money)
                 .eq(AtAccount::getUserId, userId)
                 .update();
