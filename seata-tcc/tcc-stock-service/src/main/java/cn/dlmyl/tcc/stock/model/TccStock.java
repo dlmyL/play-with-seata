@@ -1,6 +1,5 @@
 package cn.dlmyl.tcc.stock.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.Data;
 @TableName("tcc_stock")
 public class TccStock {
 
-    @TableId(type = IdType.AUTO)
+    @TableId
     private Integer id;
 
     private String commodityCode;

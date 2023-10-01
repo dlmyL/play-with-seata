@@ -1,5 +1,6 @@
 package cn.dlmyl.tcc.account.service;
 
+import cn.dlmyl.tcc.account.common.Constants;
 import cn.dlmyl.tcc.account.mapper.TccAccountMapper;
 import cn.dlmyl.tcc.account.mapper.TccAccountTxMapper;
 import cn.dlmyl.tcc.account.model.TccAccount;
@@ -68,7 +69,7 @@ public class TccAccountService extends ServiceImpl<TccAccountMapper, TccAccount>
         TccAccountTx tx = new TccAccountTx();
         tx.setFreezeMoney(money);
         tx.setTxId(RootContext.getXID());
-        tx.setState(TccAccountTx.STATE_TRY);
+        tx.setState(Constants.TxState.TRY.getState());
         accountTxMapper.insert(tx);
     }
 
@@ -107,7 +108,7 @@ public class TccAccountService extends ServiceImpl<TccAccountMapper, TccAccount>
         if (accountTx == null) {
             accountTx = new TccAccountTx();
             accountTx.setTxId(ctx.getXid());
-            accountTx.setState(TccAccountTx.STATE_CANCEL);
+            accountTx.setState(Constants.TxState.CANCEL.getState());
             if (money != null) {
                 accountTx.setFreezeMoney(Integer.parseInt(money));
             }
@@ -116,7 +117,7 @@ public class TccAccountService extends ServiceImpl<TccAccountMapper, TccAccount>
         }
 
         // 幂等处理
-        if (accountTx.getState() == TccAccountTx.STATE_CANCEL) {
+        if (accountTx.getState() == Constants.TxState.CANCEL.getState()) {
             return true;
         }
 
@@ -125,7 +126,7 @@ public class TccAccountService extends ServiceImpl<TccAccountMapper, TccAccount>
                 .setSql("money = money + " + money).eq(TccAccount::getUserId, userId));
 
         accountTx.setFreezeMoney(0);
-        accountTx.setState(TccAccountTx.STATE_CANCEL);
+        accountTx.setState(Constants.TxState.CANCEL.getState());
         int ret = accountTxMapper.updateById(accountTx);
         return ret == 1;
     }

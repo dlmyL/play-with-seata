@@ -1,5 +1,6 @@
 package cn.dlmyl.tcc.stock.service;
 
+import cn.dlmyl.tcc.stock.common.Constants;
 import cn.dlmyl.tcc.stock.mapper.TccStockMapper;
 import cn.dlmyl.tcc.stock.mapper.TccStockTxMapper;
 import cn.dlmyl.tcc.stock.model.TccStock;
@@ -72,7 +73,7 @@ public class TccStockService extends ServiceImpl<TccStockMapper, TccStock> {
         TccStockTx tx = new TccStockTx();
         tx.setCount(count);
         tx.setTxId(RootContext.getXID());
-        tx.setState(TccStockTx.STATE_TRY);
+        tx.setState(Constants.TxState.TRY.getState());
         stockTxMapper.insert(tx);
     }
 
@@ -101,7 +102,7 @@ public class TccStockService extends ServiceImpl<TccStockMapper, TccStock> {
             // 为空，空回滚
             stockTx = new TccStockTx();
             stockTx.setTxId(ctx.getXid());
-            stockTx.setState(TccStockTx.STATE_CANCEL);
+            stockTx.setState(Constants.TxState.CANCEL.getState());
             if (count != null) {
                 stockTx.setCount(Integer.parseInt(count));
             }
@@ -110,7 +111,7 @@ public class TccStockService extends ServiceImpl<TccStockMapper, TccStock> {
         }
 
         // 幂等处理
-        if (stockTx.getState() == TccStockTx.STATE_CANCEL) {
+        if (stockTx.getState() == Constants.TxState.CANCEL.getState()) {
             return true;
         }
 
@@ -119,7 +120,7 @@ public class TccStockService extends ServiceImpl<TccStockMapper, TccStock> {
                 .setSql("count = count + " + count).eq(TccStock::getCommodityCode, commodityCode));
 
         stockTx.setCount(0);
-        stockTx.setState(TccStockTx.STATE_CANCEL);
+        stockTx.setState(Constants.TxState.CANCEL.getState());
         int ret = stockTxMapper.updateById(stockTx);
         return ret == 1;
     }

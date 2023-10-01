@@ -1,6 +1,6 @@
 package cn.dlmyl.tcc.order.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
+import cn.dlmyl.tcc.order.common.Constants;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -14,15 +14,11 @@ import lombok.Data;
 @TableName("tcc_order_tx")
 public class TccOrderTx {
 
-    public static final int STATE_TRY = 0;
-    public static final int STATE_CONFIRM = 1;
-    public static final int STATE_CANCEL = 2;
-
-    @TableId(type = IdType.AUTO)
+    @TableId
     private Integer id;
 
     private String txId;
 
-    private int state = STATE_TRY;
+    private int state = Constants.TxState.TRY.getState();
 
 }

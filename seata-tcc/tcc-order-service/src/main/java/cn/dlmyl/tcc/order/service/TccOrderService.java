@@ -68,7 +68,7 @@ public class TccOrderService extends ServiceImpl<TccOrderMapper, TccOrder> {
 
         TccOrderTx tx = new TccOrderTx();
         tx.setTxId(RootContext.getXID());
-        tx.setState(TccOrderTx.STATE_TRY);
+        tx.setState(Constants.TxState.TRY.getState());
         orderTxMapper.insert(tx);
 
         // 调用账户余额扣减
@@ -101,12 +101,12 @@ public class TccOrderService extends ServiceImpl<TccOrderMapper, TccOrder> {
         if (orderTx == null) {
             orderTx = new TccOrderTx();
             orderTx.setTxId(ctx.getXid());
-            orderTx.setState(TccOrderTx.STATE_CANCEL);
+            orderTx.setState(Constants.TxState.CANCEL.getState());
             orderTxMapper.insert(orderTx);
             return true;
         }
         // 幂等处理
-        if (orderTx.getState() == TccOrderTx.STATE_CANCEL) {
+        if (orderTx.getState() == Constants.TxState.CANCEL.getState()) {
             return true;
         }
 
@@ -120,7 +120,7 @@ public class TccOrderService extends ServiceImpl<TccOrderMapper, TccOrder> {
         );
         orderMapper.deleteById(tccOrder.getId());
 
-        orderTx.setState(TccOrderTx.STATE_CANCEL);
+        orderTx.setState(Constants.TxState.CANCEL.getState());
         int ret = orderTxMapper.updateById(orderTx);
         return ret == 1;
     }
