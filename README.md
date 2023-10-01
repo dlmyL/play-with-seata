@@ -1,3 +1,5 @@
 # 玩转分布式事务之 Seata 框架全解析
-- [中间件部署文档](doc/中间件部署.md)
-- [Seata 与 Nacos 的整合配置文档](doc/Seata与Nacos的整合配置.md)
+- [基础环境的搭建与配置](doc/基础环境的搭建与配置.md)
+- [Seata-XA模式详解](doc/Seata-AT模式详解.md)
+- [Seata-AT模式详解](doc/Seata-AT模式详解.md)
+- [Seata-TCC模式详解](doc/Seata-AT模式详解.md)
