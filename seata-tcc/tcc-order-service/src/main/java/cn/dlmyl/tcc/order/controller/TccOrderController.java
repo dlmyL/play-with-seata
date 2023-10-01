@@ -24,7 +24,7 @@ public class TccOrderController {
     @GetMapping(value = "/create")
     public String create(String userId, String commodityCode, int orderCount) {
         try {
-            orderService.create(userId, commodityCode, orderCount);
+            orderService.tryCreate(userId, commodityCode, orderCount);
         } catch (Exception ex) {
             log.error("创建订单失败: {}", ex.getMessage(), ex);
             return Constants.FAIL;

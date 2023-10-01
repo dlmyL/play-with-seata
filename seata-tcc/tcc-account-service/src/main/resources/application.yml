@@ -14,9 +14,11 @@ spring:
     username: root
     password: 123456
 
-#mybatis-plus:
+mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: off
 
 seata:
   enabled: true

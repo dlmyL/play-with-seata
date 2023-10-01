@@ -1,0 +1,9 @@
+# 初始测试数据：10个商品库存、共900块钱、商品单价100块钱
+### 第一步 正常：购买2件商品，还剩下8个库存以及700块钱
+GET {{baseurl}}/businesses/purchase?rollback=false&count=2
+
+### 第二步 超库存：再次购买9件商品，但实际库存只剩下8个，所以扣减库存时会报错
+GET {{baseurl}}/businesses/purchase?rollback=false&count=9
+
+### 第三步 超余额：再次购买8件商品，但是余额只剩700块，所以扣减余额时会报错
+GET {{baseurl}}/businesses/purchase?rollback=false&count=8

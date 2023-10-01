@@ -24,7 +24,7 @@ public class TccStockController {
     @GetMapping(value = "/deduct")
     public String deduct(String commodityCode, int count) {
         try {
-            stockService.deduct(commodityCode, count);
+            stockService.tryDeduct(commodityCode, count);
         } catch (Exception ex) {
             log.error("扣减库存失败：{}", ex.getMessage(), ex);
             return Constants.FAIL;

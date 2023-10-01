@@ -1,15 +1,15 @@
 package cn.dlmyl.tcc.stock.mapper;
 
-import cn.dlmyl.tcc.stock.model.TccStock;
+import cn.dlmyl.tcc.stock.model.TccStockTx;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * TCC-Stock Mapper.
+ * TCC-Stock Tx Mapper.
  *
  * @author dlmyL
  */
 @Mapper
-public interface TccStockMapper extends BaseMapper<TccStock> {
+public interface TccStockTxMapper extends BaseMapper<TccStockTx> {
 
 }

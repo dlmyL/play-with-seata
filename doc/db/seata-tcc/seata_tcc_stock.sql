@@ -12,4 +12,12 @@ CREATE TABLE IF NOT EXISTS `tcc_stock`(
 
 INSERT INTO `tcc_stock` VALUES (1, 'C100000', 10);
 
+CREATE TABLE `tcc_stock_tx` (
+    `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `tx_id` varchar(100) NOT NULL  COMMENT '事务id',
+    `count` int DEFAULT NULL COMMENT '冻结库存',
+    `state` int DEFAULT NULL COMMENT '状态:0-try;1-confirm;2-cancel',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 commit;

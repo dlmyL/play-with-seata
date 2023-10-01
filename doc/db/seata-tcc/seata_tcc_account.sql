@@ -11,4 +11,12 @@ CREATE TABLE IF NOT EXISTS `tcc_account` (
 
 INSERT INTO `tcc_account` VALUES (1, 'U100000', 900);
 
+CREATE TABLE `tcc_account_tx` (
+    `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `tx_id` varchar(100) NOT NULL  COMMENT '事务id',
+    `freeze_money` int DEFAULT NULL COMMENT '冻结金额',
+    `state` int DEFAULT NULL COMMENT '状态:0-try; 1-confirm; 2-cancel',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 commit;
