@@ -7,7 +7,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.31.101:8848
 
 seata:
   enabled: true
@@ -20,7 +20,7 @@ seata:
     type: nacos
     nacos:
       application: seata-server
-      server-addr: 127.0.0.1:8848
+      server-addr: 192.168.31.101:8848
       namespace:
       group: SEATA_GROUP
   data-source-proxy-mode: XA

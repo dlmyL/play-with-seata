@@ -41,7 +41,7 @@ public class XaOrderService extends ServiceImpl<XaOrderMapper, XaOrder> {
         // 调用账户余额扣减
         String result = accountFeignClient.reduce(userId, orderMoney);
         if (!Constants.SUCCESS.equals(result)) {
-            throw new RuntimeException("Failed to call Account Service. ");
+            throw new RuntimeException("调用账户服务失败");
         }
     }
 

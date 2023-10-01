@@ -30,13 +30,13 @@ public class XaBusinessService {
         String result = stockFeignClient.deduct(commodityCode, orderCount);
 
         if (!Constants.SUCCESS.equals(result)) {
-            throw new RuntimeException("库存服务调用失败，事务回滚");
+            throw new RuntimeException("扣减库存失败，事务回滚");
         }
 
         result = orderFeignClient.create(userId, commodityCode, orderCount);
 
         if (!Constants.SUCCESS.equals(result)) {
-            throw new RuntimeException("订单服务调用失败，事务回滚");
+            throw new RuntimeException("创建订单失败，事务回滚");
         }
 
         if (rollback) {

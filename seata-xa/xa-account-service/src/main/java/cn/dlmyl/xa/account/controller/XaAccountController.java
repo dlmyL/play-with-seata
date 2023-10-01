@@ -26,7 +26,7 @@ public class XaAccountController {
         try {
             accountService.reduce(userId, money);
         } catch (Exception ex) {
-            log.error("账户余额扣减失败: {}", ex.getMessage(), ex);
+            log.error("扣减账户余额失败: {}", ex.getMessage(), ex);
             return Constants.FAIL;
         }
         return Constants.SUCCESS;

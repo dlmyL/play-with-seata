@@ -14,7 +14,7 @@ store.session.mode=db
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://192.168.31.101:3306/seata_config?useSSL=false&useUnicode=true&rewriteBatchedStatements=true
+store.db.url=jdbc:mysql://192.168.31.101:3306/seata_server?useSSL=false&useUnicode=true&rewriteBatchedStatements=true
 store.db.user=root
 store.db.password=123456
 store.db.minConn=5

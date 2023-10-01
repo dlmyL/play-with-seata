@@ -28,7 +28,7 @@ public class XaStockService extends ServiceImpl<XaStockMapper, XaStock> {
 
         XaStock stock = lambdaQuery().eq(XaStock::getCommodityCode, commodityCode).one();
         if (stock != null && stock.getCount() < count) {
-            throw new RuntimeException("Not Enough count ...");
+            throw new RuntimeException("库存不够了！");
         }
         lambdaUpdate().setSql("count = count-" + count)
                 .eq(XaStock::getCommodityCode, commodityCode)

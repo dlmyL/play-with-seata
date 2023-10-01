@@ -25,7 +25,7 @@ public class XaAccountService extends ServiceImpl<XaAccountMapper, XaAccount> {
 
         XaAccount account = lambdaQuery().eq(XaAccount::getUserId, userId).one();
         if (account != null && account.getMoney() < money) {
-            throw new RuntimeException("Not Enough Money ...");
+            throw new RuntimeException("账户余额不足！");
         }
         lambdaUpdate().setSql("money = money - " + money)
                 .eq(XaAccount::getUserId, userId)

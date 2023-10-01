@@ -7,16 +7,16 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.31.101:8848
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.31.101:3306/seata_xa_account?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
     password: 123456
 
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 seata:
   enabled: true
@@ -29,7 +29,7 @@ seata:
     type: nacos
     nacos:
       application: seata-server
-      server-addr: 127.0.0.1:8848
+      server-addr: 192.168.31.101:8848
       namespace:
       group: SEATA_GROUP
   data-source-proxy-mode: XA
