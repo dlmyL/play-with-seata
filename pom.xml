@@ -27,6 +27,7 @@
     <modules>
         <module>seata-xa</module>
         <module>seata-at</module>
+        <module>seata-tcc</module>
     </modules>
 
     <dependencyManagement>

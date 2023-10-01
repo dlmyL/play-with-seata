@@ -1,0 +1,35 @@
+server:
+  port: 9023
+
+spring:
+  application:
+    name: tcc-account-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.101:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.31.101:3306/seata_tcc_account?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 123456
+
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+seata:
+  enabled: true
+  application-id: seata_tx
+  tx-service-group: seata_tx_group
+  service:
+    vgroup-mapping:
+      seata_tx_group: default
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 192.168.31.101:8848
+      namespace:
+      group: SEATA_GROUP
+  data-source-proxy-mode: AT

@@ -1,0 +1,27 @@
+server:
+  port: 9020
+
+spring:
+  application:
+    name: tcc-business-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.101:8848
+
+seata:
+  enabled: true
+  application-id: seata_tx
+  tx-service-group: seata_tx_group
+  service:
+    vgroup-mapping:
+      seata_tx_group: default
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 192.168.31.101:8848
+      namespace:
+      group: SEATA_GROUP
+  data-source-proxy-mode: AT
+
