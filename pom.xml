@@ -26,6 +26,7 @@
 
     <modules>
         <module>seata-xa</module>
+        <module>seata-at</module>
     </modules>
 
     <dependencyManagement>

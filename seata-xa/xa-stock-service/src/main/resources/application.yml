@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: stock-service
+    name: xa-stock-service
   cloud:
     nacos:
       discovery:

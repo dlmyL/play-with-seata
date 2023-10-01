@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author dlmyL
  */
-@FeignClient(name = "xa-account-service")
-public interface XaAccountFeignClient {
+@FeignClient(name = "at-account-service")
+public interface AtAccountFeignClient {
 
     /**
      * 账户余额扣减

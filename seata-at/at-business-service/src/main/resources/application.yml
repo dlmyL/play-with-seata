@@ -1,9 +1,9 @@
 server:
-  port: 9000
+  port: 9010
 
 spring:
   application:
-    name: xa-business-service
+    name: at-business-service
   cloud:
     nacos:
       discovery:
@@ -23,5 +23,5 @@ seata:
       server-addr: 192.168.31.101:8848
       namespace:
       group: SEATA_GROUP
-  data-source-proxy-mode: XA
+  data-source-proxy-mode: AT
 

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author dlmyL
  */
-@FeignClient(name = "xa-stock-service")
-public interface XaStockFeignClient {
+@FeignClient(name = "at-stock-service")
+public interface AtStockFeignClient {
 
     /**
      * 扣减库存

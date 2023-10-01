@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author dlmyL
  */
-@FeignClient(name = "xa-order-service")
-public interface XaOrderFeignClient {
+@FeignClient(name = "at-order-service")
+public interface AtOrderFeignClient {
 
     /**
      * 创建订单

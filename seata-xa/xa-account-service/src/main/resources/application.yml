@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: account-service
+    name: xa-account-service
   cloud:
     nacos:
       discovery:
